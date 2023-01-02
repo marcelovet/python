@@ -23,4 +23,3 @@ else:
     print('Nenhuma condição satisfeita')
 
 print('Este é o código fora do if')
-
