@@ -6,4 +6,6 @@ altura = 1.8
 peso = 95
 imc = peso / (altura ** 2)
 
-print(nome, 'tem', altura, 'de altura,\npesa', peso, 'quilos e seu IMC é', imc)
+# usando o f-strings
+linha_1 = f'{nome}, tem {altura:.2f} de altura,\npesa {peso} quilos e seu IMC é {imc:.2f}.'
+print(linha_1)
