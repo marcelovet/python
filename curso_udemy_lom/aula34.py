@@ -3,6 +3,8 @@ Calculadora com while
 Pedir dois numeros e um operador
 e realizar a operação
 """
+print('Bem vindo à calculadora de burrico')
+
 while True:
     numero_1 = input('Digite um número: ')
     numero_2 = input('Digite outro número: ')
@@ -48,3 +50,5 @@ while True:
     sair = sair.lower().startswith('s')
     if sair:
         break
+
+print('Calculadora de burrico finalizada')
