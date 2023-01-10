@@ -21,7 +21,7 @@ def novo_escopo():
 
 def mais_um_escopo():
     # alterando o valor de x que está no escopo global
-    global x
+    global x # isso é uma má prática
     x = 5
     print(x)
 
