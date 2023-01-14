@@ -28,7 +28,7 @@ def generator(n=0, max=10):
         yield n
         n += 1
         if n > max:
-            return
+            return print('Acabou')
         
 
 gen = generator()
