@@ -3,7 +3,7 @@
 # __all__ = [
 #     'soma_do_modulo'
 # ]
-from aula89_package.modulo_b import fala_oi
+# from aula89_package.modulo_b import fala_oi
 
 variavel = 'variavel'
 
