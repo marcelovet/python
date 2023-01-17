@@ -15,3 +15,5 @@
 # pip index version nome para verificar as versoes disponiveis da biblioteca nome
 # pip install nome==versao para instalar uma versao especifica
 # pip install nome --upgrade
+# pip freeze > requirements.txt para gerar os requisitos de bibliotecas do projeto
+# pip install -r requirements.txt para instalar o que está descrito no arquivo

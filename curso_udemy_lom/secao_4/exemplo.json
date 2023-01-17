@@ -1,0 +1,18 @@
+// true
+// 123.12
+// null
+// "string"
+// [] array
+// {} objeto
+[
+    {"name": "Luiz", "lastname": "Fulano", "age": 12},
+    {"name": "Zé", "lastname": "Fulano", "age": null,"activeUser": true},
+    {
+        "name": "Felipe",
+        "lastname": "Sicrano",
+        "addresses": [
+            {"line1": "av. que é rua", "zip": "2123-00"},
+            {"line1": "av. que não é rua", "zip": "2323-00"}
+        ]
+    }
+]
