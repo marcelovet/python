@@ -35,5 +35,4 @@ p1, p2 = Produto('caneta', 1.20), Produto('camiseta', 20)
 carrinho.inserir_produtos(p1, p2)
 
 carrinho.listar_produtos()
-print(carrinho.total())
-print(carrinho._total)
+carrinho.total()
