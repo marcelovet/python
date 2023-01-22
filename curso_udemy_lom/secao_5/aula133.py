@@ -16,9 +16,6 @@ class AbstractFoo(ABC):
     @abstractmethod
     def name(self): ...
 
-    @name.setter
-    def name(self, name): ...
-
 
 class Foo(AbstractFoo):
     def __init__(self, name):
@@ -28,6 +25,7 @@ class Foo(AbstractFoo):
     @property
     def name(self):
         return self._name
+    # @AbstractFoo.name.setter se fosse definir o setter como abstrato
 
     @name.setter
     def name(self, name):
