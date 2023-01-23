@@ -1,7 +1,9 @@
 # Relacoes entre classes: associação, agregação, composicao
-# Agregacao é uma forma mais especializada de associacao entre dois ou mais objetos
+# Agregacao é uma forma mais especializada de associacao entre dois ou mais
+# objetos
 # Cada objeto tera seu ciclo de vida independente
-# Geralmente é uma relacao de um para muitos (um objeto tem um ou muitos objetos)
+# Geralmente é uma relacao de um para muitos (um objeto tem um ou muitos
+# objetos)
 # Os objetos podem viver separadamente, mas pode se tratar de uma relacao onde
 # um objeto precisa de outro para fazer determinada tarefa
 # (existem controversias sobre as definicoes de agregacao)
