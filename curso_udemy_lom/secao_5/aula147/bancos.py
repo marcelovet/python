@@ -23,9 +23,7 @@ class Banco:
 
     def _checa_agencia(self, conta):
         if conta.agencia not in self.agencias:
-            print(f'{conta.agencia} not in {self.agencias}')
             return False
-        print(f'{conta.agencia} in {self.agencias}')
         return True
 
     def _checa_cliente(self, cliente):
@@ -38,10 +36,16 @@ class Banco:
             return False
         return True
 
+    def _checa_conta_e_do_cliente(self, cliente, conta):
+        if conta is cliente.conta:
+            return True
+        return False
+
     def autenticar(self, cliente: clientes.Pessoa, conta: contas.Conta):
         return self._checa_agencia(conta) and \
             self._checa_cliente(cliente) and \
-            self._checa_conta(conta)
+            self._checa_conta(conta) and \
+            self._checa_conta_e_do_cliente(cliente, conta)
 
     def __repr__(self) -> str:
         class_name = type(self).__name__
@@ -58,9 +62,9 @@ if __name__ == '__main__':
     c2.conta = cp1
     banco = Banco()
     # print(banco)
-    banco.agencias.extend(['123', '121', '122'])
+    banco.agencias.extend(['123', '121', '1233'])
     banco.clientes.extend([c1, c2])
     banco.contas.extend([cc1, cp1])
     c2.conta.depositar(100)
     print(banco.autenticar(c1, c1.conta))
-    print(banco.autenticar(c2, c2.conta))
+    print(banco.autenticar(c2, cp1))
