@@ -12,9 +12,10 @@ class MyList(Sequence):
         self._index = 0
         self._next_index = 0
 
-    def append(self, value):
-        self._data[self._index] = value
-        self._index += 1
+    def append(self, *values):
+        for value in values:
+            self._data[self._index] = value
+            self._index += 1
 
     def __len__(self) -> int:
         return self._index
@@ -30,6 +31,7 @@ class MyList(Sequence):
 
     def __next__(self):
         if self._next_index >= self._index:
+            self._next_index = 0
             raise StopIteration
         value = self._data[self._next_index]
         self._next_index += 1
@@ -38,11 +40,14 @@ class MyList(Sequence):
 
 if __name__ == '__main__':
     lista = MyList()
-    lista.append('Maria')
+    lista.append('Maria', 'Fulano')
     lista[0] = 'Joao'
     lista.append('Luiz')
     print(lista._data)
     print(lista[0])
     print(len(lista))
+    for item in lista:
+        print(item)
+    print('---')
     for item in lista:
         print(item)
