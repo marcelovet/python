@@ -13,4 +13,5 @@ def soma(x, y, z=None): # o None no z como padrão permite enviar ou não o par�
 
 soma(1, 2)
 soma(3, 5)
+
 soma(3, 5, 6)
