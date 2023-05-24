@@ -3,8 +3,12 @@
 # print(list(range(10)))
 import pprint
 
+import numpy as np
+
+
 def p(v):
     pprint.pprint(v, sort_dicts=False, width=60)
+
 
 # list comprehension
 lista = [numero for numero in range(10)]
@@ -48,9 +52,9 @@ print(lista)
 # Importante! ele filtra primeiro antes do mapeamento
 novos_produtos = [
     {**produto, 'preco': produto['preco'] * 1.05}
-    if produto['preco'] > 20 else {**produto} # mapeamento
+    if produto['preco'] > 20 else {**produto}  # mapeamento
     for produto in produtos
-    if produto['modelo'] == 'bcx' # filtro
+    if produto['modelo'] == 'bcx'  # filtro
 ]
 
 p(novos_produtos)
@@ -64,7 +68,15 @@ print(lista)
 
 lista = [
     (x, y)
-    for x in range(3)    
-    for y in range(3)    
+    for x in range(3)
+    for y in range(3)
 ]
 print(lista)
+
+lista = [
+    [x if x <= y else 0 for y in range(5)]
+    for x in range(5)
+]
+print(lista)
+array_da_lista = np.array(lista)
+print(array_da_lista)

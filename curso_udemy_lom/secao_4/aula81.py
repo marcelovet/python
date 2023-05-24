@@ -23,13 +23,14 @@ print(sys.getsizeof(generator))
 #     yield 3 # Pausar
 #     return 'Acabou'
 
+
 def generator(n=0, max=10):
     while True:
         yield n
         n += 1
         if n > max:
             return print('Acabou')
-        
+
 
 gen = generator()
 

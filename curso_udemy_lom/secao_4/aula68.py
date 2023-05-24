@@ -1,6 +1,6 @@
 # Exercício - sistema de perguntas e respostas
 
-perguntas =[
+perguntas = [
     {
         'Pergunta': 'Quanto é 2+2?',
         'Opções': ['1', '3', '4', '5'],
@@ -42,7 +42,7 @@ while num_perguntas_respondidas < num_perguntas:
     if idx_resposta not in range(0, len(questao_atual['Opções'])):
         print('Escolha uma das opções fornecidas', end='\n\n')
         continue
-    
+
     if questao_atual['Opções'][idx_resposta] == questao_atual['Resposta']:
         print('Acertou', end='\n\n')
         num_acertos += 1

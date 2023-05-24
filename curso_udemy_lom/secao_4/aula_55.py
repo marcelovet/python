@@ -10,6 +10,8 @@ def nome_da_funcao():
 no exemplo abaixo
 num é um argumento
 """
+
+
 def print_varias_vezes(num=1):
     print(f'Você solicitou {num} prints')
     for i in range(num):

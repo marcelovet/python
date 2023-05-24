@@ -1,13 +1,17 @@
 from functools import partial
 from types import GeneratorType
 
+
 # map - mapeamento de dados
 def print_iter(iterator):
     print(*list(iterator), sep='\n', end='\n\n')
 
 # partial é função que retorna uma closure
+
+
 def aumentar_porcentagem(valor, porcentagem):
     return round(valor * porcentagem, 2)
+
 
 aumentar_dez_porcento = partial(
     aumentar_porcentagem,
@@ -26,11 +30,14 @@ produtos = [
 #     {**p, 'preco': aumentar_dez_porcento(p['preco'])} for p in produtos
 # ]
 # o mesmo com o map()
+
+
 def muda_preco_produtos(produto):
     return {
         **produto,
         'preco': aumentar_dez_porcento(produto['preco'])
     }
+
 
 novos_produtos = map(
     muda_preco_produtos,
@@ -38,7 +45,7 @@ novos_produtos = map(
 )
 
 print_iter(produtos)
-print_iter(novos_produtos) # map cria um iterator
+print_iter(novos_produtos)  # map cria um iterator
 print(hasattr(novos_produtos, '__iter__'))
 print(hasattr(novos_produtos, '__next__'))
 print(isinstance(novos_produtos, GeneratorType))

@@ -11,11 +11,14 @@ def parametros_decorador(nome):
     return decorador
 
 # a ordem dos decoradores é de baixo para cima
+
+
 @parametros_decorador(nome='terceiro')
 @parametros_decorador(nome='segundo')
 @parametros_decorador(nome='primeiro')
 def soma(x, y):
     return x + y
 
-dez_mais_cinco = soma(10 ,5)
+
+dez_mais_cinco = soma(10, 5)
 print(dez_mais_cinco)

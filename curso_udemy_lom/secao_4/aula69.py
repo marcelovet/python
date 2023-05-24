@@ -3,17 +3,18 @@ Sets - conjuntos em python (tipo set)
 Conjuntos são ensinados na matemática
 https://brasilescola.uol.com.br/matematica/definicao-conjunto.htm
 Representados graficamente pelo diagrama de Venn
-Sets em python são mutáveis, porem aceitam apenas tipos imutaveis como valor interno
+Sets em python são mutáveis, porem aceitam apenas tipos imutaveis como valor
+interno
 """
 # Criando um set
 # set(iteravel) ou {1, 2, 3}
-s1 = set() # para criar set vazio s1 = {} cria um dict vazio
+s1 = set()  # para criar set vazio s1 = {} cria um dict vazio
 print(s1)
 
-s1 = set('Marcelo') # com dados e itera em cada elemento
+s1 = set('Marcelo')  # com dados e itera em cada elemento
 print(s1)
 
-s1 = {'Marcelo'} # com dados, mas o elemento é a str total
+s1 = {'Marcelo'}  # com dados, mas o elemento é a str total
 print(s1)
 
 # sets são eficientes para remover valores duplicados de iteraveis
@@ -51,19 +52,21 @@ for elemento in s1:
 # métodos uteis em sets
 # add, update, clear, discard
 s1 = set()
-s1.add('luiz') # adiciona um elemento por vez
+s1.add('luiz')  # o elemento todo
 s1.add(1)
 print(s1)
 
-s1.update(('Olá mundo', 1, 2, 3, 4)) # permite adicionar mais de um elemento
+s1.update(('Olá mundo', 1, 2, 3, 4))  # permite adicionar mais de um elemento
+s1.update('luiz')
 print(s1)
+print('\n\n')
 
-s1.clear() # limpa o set
+s1.clear()  # limpa o set
 print(s1)
 
 s1.update(('Olá mundo', 1, 2, 3, 4))
-s1.discard('Olá mundo') # descarta o elemento informado
-s1.discard(99) # não gera erro se não há o elemento informado
+s1.discard('Olá mundo')  # descarta o elemento informado
+s1.discard(99)  # não gera erro se não há o elemento informado
 print(s1)
 
 # Operadores uteis

@@ -1,11 +1,15 @@
 """
 Exercicio para closure
-Crie funções que duplicam, triplicam e quadruplicam o numero recebido como parametro
+Crie funções que duplicam, triplicam e quadruplicam o numero recebido como
+parametro
 """
+
+
 def multiplicador(numero_base):
     def multiplica(numero):
         return numero * numero_base
     return multiplica
+
 
 retorna_dobro = multiplicador(2)
 retorna_triplo = multiplicador(3)

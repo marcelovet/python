@@ -20,4 +20,3 @@ print(f'{variavel: >10}')
 print(f'{variavel:-^10}')
 print(f'{1000.45897643:0=+10,.1f}')
 print(f'O hexadecimal de 1500 é {1500:06X}')
-

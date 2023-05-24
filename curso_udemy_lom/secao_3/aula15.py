@@ -1,6 +1,7 @@
 # Coletar dados do usuário
 # input() sempre capta o dado no tipo str
-# print(f'O seu nome é {nome=}') usando o = após o nome da variável ele traz o print com a variavel e valor
+# print(f'O seu nome é {nome=}') usando o = após o nome da variável ele traz
+# o print com a variavel e valor
 # nome = input('Qual o seu nome? ')
 # print(f'O seu nome é {nome}')
 # print(f'O seu nome é {nome=}')

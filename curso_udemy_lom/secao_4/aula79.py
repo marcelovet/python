@@ -13,8 +13,10 @@ falso = False
 intervalo = range(0)
 teste = 'teste'
 
+
 def falsy(valor):
     return 'falsy' if not valor else 'truthy'
+
 
 print(f'{teste}', falsy(teste))
 print(f'{lista=}', falsy(lista))
