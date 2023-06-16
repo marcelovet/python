@@ -1,11 +1,14 @@
 # classes abstratas - Abstract Base Class (abc)
-# ABC são usadas como contratos para a definição de novas classes. Elas podem forçar
-# outras classes a criarem metodos concretos. Também podem ter metodos concretos por elas mesmas.
+# ABC são usadas como contratos para a definição de novas classes.
+# Elas podem forçar outras classes a criarem metodos concretos.
+# Também podem ter metodos concretos por elas mesmas.
 # @abstractmethods sao metodos que nao tem corpo.
-# As regras para classes abstratas com metodos abstratos é que elas NAO PODEM ser instanciadas diretamente.
+# As regras para classes abstratas com metodos abstratos é que elas NAO PODEM
+# ser instanciadas diretamente.
 # Metodos abstratos DEVEM ser implementados nas subclassses (@abstractmethod).
 # Uma classe abstrata em python tem sua metaclasse sendo ABCMeta.
-# É possivel criar @property @setter @classmethod @staticmethod e @method como abstratos,
+# É possivel criar @property @setter @classmethod @staticmethod e
+# @method como abstratos,
 # para isso use @abstractmethod como decorador mais interno
 # Formas de criar classes abstratas:
 from abc import ABC, abstractmethod

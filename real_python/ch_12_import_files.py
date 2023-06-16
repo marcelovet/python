@@ -140,6 +140,7 @@
 # file paths across operating systems.
 # Read on to learn how to use pathlib to work with file paths in Python.
 
+import csv
 import pathlib
 # Working With File Paths in Python
 # To work with file paths in Python, use the standard libraries pathlib
@@ -837,3 +838,277 @@ print(f'{text!r}')
 with text_path.open(mode="r", encoding="utf-8") as file:
     for line in file.readlines():
         print(line, end="")
+    print()
+
+# If you try to read from a file that does not exists, both .open() and
+# open() raise a FileNotFoundError
+
+# Writing Data To a File
+# To write data to a plain text file, you pass a string to a file object’s
+# .write() method. The file object must be opened in write mode by
+# passing the value "w" to the mode parameter.
+
+with text_path.open(mode="w", encoding="utf-8") as file:
+    file.write("Hi there!")
+
+# When you set mode="w" in .open(), the contents of the original file
+# are overwritten. This results in the loss of all of the original data
+# in the file!
+
+with text_path.open(mode="r", encoding="utf-8") as file:
+    print(file.read())
+
+# You can append data to the end of a file by opening the file in append
+# mode:
+
+with text_path.open(mode="a", encoding="utf-8") as file:
+    file.write("\nHello")
+
+with text_path.open(mode="r", encoding="utf-8") as file:
+    print(file.read())
+
+# You can write multiple lines to a file at the same time using the
+# .writelines() method. First, create a list of strings:
+lines_of_text = [
+    "Hello from Line 1\n",
+    "Hello from Line 2\n",
+    "Hello from Line 3\n"
+]
+
+with text_path.open(mode="w", encoding="utf-8") as file:
+    file.writelines(lines_of_text)
+
+with text_path.open(mode="w", encoding="utf-8") as file:
+    file.write("Hello world\nHi again")
+
+# If you open a non-existent path in write mode, Python attempts to
+# automatically create the file. If all of the parent folders in the path
+# exist, then the file can be created without problem:
+# If you want to write to a path with parent folders that may not exist,
+# call the .mkdir() method with the parents parameter set to True before
+# opening the file in write mode
+new_text_path = cwd_path / "new_directory" / "new_file.txt"
+new_text_path.parent.mkdir(parents=True, exist_ok=True)
+with new_text_path.open(mode="w", encoding="utf-8") as file:
+    file.write("Hello!")
+print(new_text_path.is_file() and new_text_path.exists())
+new_text_path.unlink()
+
+# Read and Write CSV Data
+# The csv Module
+# The csv module can be used to read and write CSV files.
+# import csv
+# Writing CSV Files With csv.writer
+
+daily_temperatures = [
+    [68, 65, 68, 70, 74, 72],
+    [67, 67, 70, 72, 72, 70],
+    [68, 70, 74, 76, 74, 73]
+]
+
+# Instead of using a with statement, a file object is created and assigned
+# to the file variable so that we can inspect each step of the writing
+# process as we go.
+
+csv_path = cwd_path / "new_directory" / "temperatures.csv"
+file = csv_path.open(mode="w", encoding="utf-8")
+writer = csv.writer(file)
+for temp_list in daily_temperatures:
+    writer.writerow(temp_list)
+file.close()
+
+# here’s what the code looks like using the with statement:
+with csv_path.open(mode="w", encoding="utf-8") as file:
+    writer = csv.writer(file)
+    for temp_list in daily_temperatures:
+        writer.writerow(temp_list)
+
+# .writerow() writes a single row to the CSV file, but you can write multiple
+# rows at one using the .writerows() method. This shortens the code
+# even more when your data is already in a list of lists:
+with csv_path.open(mode="w", encoding="utf-8") as file:
+    writer = csv.writer(file, lineterminator="\n")
+    writer.writerows(daily_temperatures)
+
+# Reading CSV Files With csv.reader
+# Create an empty list
+daily_temperatures = []
+with csv_path.open(mode="r", encoding="utf-8") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        # Convert row to list of integers
+        int_row = [int(value) for value in row]
+        # Append the list of integers to daily_temperatures list
+        daily_temperatures.append(int_row)
+print(daily_temperatures)
+
+# Reading and Writing CSV Files With Headers
+# It’s possible to read CSV files such as the one above using csv.reader(),
+# but you have to keep track of the header row, and each row is returned
+# as a list without the field names attached to it. It makes more sense to
+# return each row as a dictionary whose keys are the field names and values
+# are the field values in the row. This is precisely what csv.DictReater
+# objects do!
+# name,department,salary
+# Lee,Operations,75000.00
+# Jane,Engineering,85000.00
+# Diego,Sales,80000.00
+employees_dt = [
+    ['name', 'department', 'salary'],
+    ['Lee', 'Operations', 75000.00],
+    ['Jane', 'Engineering', 85000.00],
+    ['Diego', 'Sales', 80000.00]
+]
+
+csv_path = cwd_path / "new_directory" / "employees.csv"
+with csv_path.open(mode='w', encoding='utf-8') as file:
+    writer = csv.writer(file, lineterminator="\n")
+    writer.writerows(employees_dt)
+
+# open the employees.csv file and create a new csv.DictReater object:
+file = csv_path.open(mode='r', encoding='utf-8')
+reader = csv.DictReader(file)
+print(reader.fieldnames)
+for row in reader:
+    print(row)
+file.close()
+print()
+
+
+def process_row(row, key='salary'):
+    """Cast a str to float value inside a dict"""
+    row[key] = float(row[key])
+    return row
+
+
+with csv_path.open(mode='r', encoding='utf-8') as file:
+    reader = csv.DictReader(file)
+    print(*[process_row(row) for row in reader], sep='\n')
+
+# You can write CSV files with headers using the csv.DictWriter class,
+# which writes dictionaries with shared keys to rows in a CSV file.
+people = [
+    {'name': 'Veronica', 'age': 29},
+    {'name': 'Audrey', 'age': 32},
+    {'name': 'Sam', 'age': 24},
+]
+csv_path = cwd_path / "new_directory" / "people.csv"
+with csv_path.open(mode='w', encoding='utf-8') as file:
+    writer = csv.DictWriter(
+        file, fieldnames=people[0].keys(), lineterminator="\n"
+    )
+    writer.writeheader()
+    writer.writerows(people)
+
+# Review Exercises
+# 1. Write a script that writes the following list of lists to a file called
+# numbers.csv in your home directory:
+numbers = [
+    [1, 2, 3, 4, 5],
+    [6, 7, 8, 9, 10],
+    [11, 12, 13, 14, 15],
+]
+csv_path = cwd_path / "new_directory" / "numbers.csv"
+with csv_path.open(mode='w', encoding='utf-8') as file:
+    writer = csv.writer(file, lineterminator="\n")
+    writer.writerows(numbers)
+
+# 2. Write a script that reads the numbers in the numbers.csv file from
+# Exercise 1 into a list of lists of integers called numbers. Print the list
+# of lists. Your output should like the following:
+# [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]]
+
+
+def list_str_to_int(row):
+    int_list = [int(val) for val in row]
+    return int_list
+
+
+with csv_path.open(mode='r', encoding='utf-8') as file:
+    reader = csv.reader(file)
+    print([list_str_to_int(row) for row in reader])
+
+# 3. Write a script that writes the following list of dictionaries to a file
+# called favorite_colors.csv in your home directory:
+favorite_colors = [
+    {"name": "Joe", "favorite_color": "blue"},
+    {"name": "Anne", "favorite_color": "green"},
+    {"name": "Bailey", "favorite_color": "red"},
+]
+csv_path = cwd_path / "new_directory" / "favorite_colors.csv"
+with csv_path.open(mode='w', encoding='utf-8') as file:
+    writer = csv.DictWriter(
+        file, fieldnames=favorite_colors[0].keys(), lineterminator='\n'
+    )
+    writer.writeheader()
+    writer.writerows(favorite_colors)
+# The output CSV file should have the following format:
+# name,favorite color
+# Joe,blue
+# Anne,green
+# Bailey,red
+# 4. Write a script that reads the data from the favorite_colors.csv file
+# from Exercise 3 into a list of dictionaries called favorite_colors.
+# Print the list of dictionaries. The output should look something
+# like this:
+# [{"name": "Joe", "favorite_color": "blue"},
+# {"name": "Anne", "favorite_color": "green"},
+# {"name": "Bailey", "favorite_color": "red"}]
+with csv_path.open(mode='r', encoding='utf-8') as file:
+    reader = csv.DictReader(file)
+    print(list(reader))
+
+# Challenge: Create a High Scores
+# List
+# In the Chapter 12 Practice Files folder, there is a CSV file called
+# scores.csv containing data about game players and their scores. The
+# first few lines of the file look like this:
+# name, score
+# LLCoolDave,23
+# LLCoolDave,27
+# red,12
+# LLCoolDave,26
+# tom123,26
+# Write a script that reads the data from this CSV file and creates a new
+# file called high_scores.csv where each row contains the player name
+# and their highest score.
+# The output CSV file should look like this:
+# name,high_score
+# LLCoolDave,27
+# red,12
+# tom123,26
+# O_O,7
+# Misha46,25
+# Empiro,23
+# MaxxT,25
+
+# first read the csv file into a list of dicts
+csv_path = cwd_path / "new_directory" / "scores.csv"
+with csv_path.open(mode='r', encoding='utf-8') as file:
+    reader = csv.DictReader(file)
+    scores = [process_row(row, 'score') for row in reader]
+
+# print(scores)
+print()
+
+# now sort by name and score
+scores_by_name = sorted(scores, key=lambda k: (k['name'], -k['score']))
+# print(*scores_by_name, sep='\n')
+
+# then get only the high score
+names = set()
+high_scores = list()
+for score in scores_by_name:
+    if score['name'] in names:
+        continue
+    high_scores.append(score)
+    names.add(score['name'])
+
+print(high_scores)
+csv_path = cwd_path / "new_directory" / "high_scores.csv"
+with csv_path.open(mode='w', encoding='utf-8') as file:
+    writer = csv.DictWriter(
+        file, fieldnames=high_scores[0].keys(), lineterminator='\n'
+    )
+    writer.writeheader()
+    writer.writerows(high_scores)

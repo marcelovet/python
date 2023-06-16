@@ -22,7 +22,8 @@ class Pessoa:
 
 class Cliente(Pessoa):
     # seguindo o method resolution order (MRO)
-    # ele vai encontrar esse metodo aqui e nao vai executar o de mesmo nome em Pessoa
+    # ele vai encontrar esse metodo aqui e nao vai executar o de
+    # mesmo nome em Pessoa
     def falar_nome_classe(self):
         print('class Cliente')
         print(self.nome, self.sobrenome, self.__class__.__name__)
@@ -40,4 +41,5 @@ c1.falar_nome_classe()
 a1.falar_nome_classe()
 print(c1.cpf)
 print(a1.cpf)
-# heranca de 3 niveis = OK, mais que isso a complexidade começa a ser muito grande
+# heranca de 3 niveis = OK, mais que isso a complexidade começa a ser muito
+# grande

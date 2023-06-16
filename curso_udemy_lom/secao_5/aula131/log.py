@@ -18,9 +18,9 @@ class Log:
 
 class LogFileMixin(Log):
     def _log(self, msg):
-        msg_formatada = f'{msg} (class {self.__class__.__name__})'
-        with open(LOG_FILE, 'a', encoding='utf-8') as file:
-            file.writelines((msg_formatada, '\n'))
+        msg_formatada = f'{msg} (class {self.__class__.__name__})\n'
+        with LOG_FILE.open('a', encoding='utf-8') as file:
+            file.write(msg_formatada)
 
 
 class LogPrintMixin(Log):
